@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Designs</title>
+    </h:head>
+    <h:body>
+        <f:view>
+            <h:form>
+                <h1><h:outputText value="Create/Edit"/></h1>
+                <h:messages></h:messages>
+                <h:panelGrid columns="2">
+                    
+                    <h:outputLabel value="NombreDisenio:" for="nombreDisenio" />
+                    <h:inputText id="nombreDisenio" value="#{disenioManagedBean.disenio.nombreDisenio}" title="NombreDisenio" required="true" requiredMessage="The NombreDisenio field is required."/>
+                    <h:outputLabel value="SesionesRecomendadas:" for="sesionesRecomendadas" />
+                    <h:inputText id="sesionesRecomendadas" value="#{disenioManagedBean.disenio.sesionesRecomendadas}" title="SesionesRecomendadas" required="true" requiredMessage="The SesionesRecomendadas field is required."/>
+                    <h:outputLabel value="PrecioDisenio:" for="precioDisenio" />
+                    <h:inputText id="precioDisenio" value="#{disenioManagedBean.disenio.precioDisenio}" title="PrecioDisenio" required="true" requiredMessage="The PrecioDisenio field is required."/>
+                    <h:outputLabel value="Anotaciones:" for="anotaciones" />
+                    <h:inputTextarea rows="4" cols="30" id="anotaciones" value="#{disenioManagedBean.disenio.anotaciones}" title="Anotaciones" required="true" requiredMessage="The Anotaciones field is required."/>
+                    <h:outputLabel value="IdEstiloDisenio:" for="idEstiloDisenio" />
+                    <h:selectOneMenu id="idEstiloDisenio" value="#{disenioManagedBean.disenio.idEstiloDisenio}" title="IdEstiloDisenio" required="true" requiredMessage="The IdEstiloDisenio field is required.">
+                        <!-- TODO: update below reference to list of available items-->
+                        <f:selectItems value="#{estiloDisenioManagedBean.listarDisenio()}" var="estilo" itemLabel="#{estilo.nombreEstilo}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="IdUsuario:" for="idUsuario" />
+                    <h:selectOneMenu id="idUsuario" value="#{disenioManagedBean.disenio.idUsuario}" title="IdUsuario" required="true" requiredMessage="The IdUsuario field is required.">
+                        <!-- TODO: update below reference to list of available items-->
+                        <f:selectItems value="#{usuarioManagedBean.listarUsuario()}" var="tatuador" itemLabel="#{tatuador.nombre} #{tatuador.apellido}" />
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandButton value="Registrar" actionListener="#{disenioManagedBean.registrarDisenio()}"/>
+            </h:form>
+        </f:view>
+
+    </h:body>
+</html>
+

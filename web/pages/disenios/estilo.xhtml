@@ -8,9 +8,40 @@
         <title>Estilo</title>
     </h:head>
     <h:body>
-        <div class="row">
-            <p:panel header="Registrar Estilo">
-                <h:form id="formulario">
+        <h:form id="fr">
+            <div class="row">
+                <p:panel header="Registrar Estilo">
+                    <h:form id="formulario">
+                        <p:messages autoUpdate="true"/>
+                        <h:panelGrid columns="2" cellpadding="5" cellspacing="5">
+                            <h:outputLabel value="Nombre de Estilo:" for="nombreEstilo" />
+                            <p:inputText id="pernombre" value="#{estiloManagedBean.estil.nombreEstilo}" title="Nombreestilo" required="true" label="Nombre Estilo">
+                                <f:validateLength maximum="20" minimum="3"/>
+                            </p:inputText>
+
+                            <h:outputLabel value="Descripción:" for="descripcionEstilo"/>
+                            <p:inputTextarea id="perapellido" value="#{estiloManagedBean.estil.descripcionEstilo}" title="Descripcionestilo" required="true" label="Descripción">
+                                <f:validateLength maximum="600" minimum="3"/>
+                            </p:inputTextarea>
+                            <p:commandButton value="Registrar" update=":fr:formulario :fr:tabla" actionListener="#{estiloManagedBean.registrarEstilo()}"/>
+                        </h:panelGrid>
+                    </h:form>
+                </p:panel>
+                <p:dataTable value="#{estiloManagedBean.lisest}" var="p" id="tabla" >
+                    <p:column headerText="Nombre">
+                        <p:outputLabel value="#{p.nombreEstilo}"/>
+                    </p:column>
+                    <p:column headerText="Apellido">
+                        <p:outputLabel value="#{p.descripcionEstilo}"/>
+                    </p:column>
+                    <p:column>
+                        <p:commandButton value="Eliminar" actionListener="#{estiloManagedBean.eliminarEstilo(p)}" update="tabla"/>
+                        <p:commandButton value="Modificar" actionListener="#{estiloManagedBean.actualizarEstilo(p)}" oncomplete="PF('dlg2').show();" update=":fr:formulario2"/>
+                    </p:column>
+                </p:dataTable>
+            </div>
+            <p:dialog header="Modal Dialog" widgetVar="dlg2" modal="true" height="100">
+                <h:form id="formulario2">
                     <p:messages autoUpdate="true"/>
                     <h:panelGrid columns="2" cellpadding="5" cellspacing="5">
                         <h:outputLabel value="Nombre de Estilo:" for="nombreEstilo" />
@@ -22,21 +53,10 @@
                         <p:inputTextarea id="perapellido" value="#{estiloManagedBean.estil.descripcionEstilo}" title="Descripcionestilo" required="true" label="Descripción">
                             <f:validateLength maximum="600" minimum="3"/>
                         </p:inputTextarea>
-                        <p:commandButton value="Registrar" update=":formulario :tabla" actionListener="#{estiloManagedBean.registrarEstilo()}"/>
+                        <p:commandButton value="Registrar" update=":fr:formulario :fr:tabla" actionListener="#{estiloManagedBean.modificarEstilo()}"/>
                     </h:panelGrid>
                 </h:form>
-            </p:panel>
-            <p:dataTable value="#{estiloManagedBean.lisest}" var="p" id="tabla" >
-                <p:column headerText="Nombre">
-                    <p:outputLabel value="#{p.nombreEstilo}"/>
-                </p:column>
-                <p:column headerText="Apellido">
-                    <p:outputLabel value="#{p.descripcionEstilo}"/>
-                </p:column>
-                <p:column>
-                    <p:commandButton value="Eliminar" actionListener="#{estiloManagedBean.eliminarEstilo(p)}" update="tabla"/>
-                </p:column>
-            </p:dataTable>
-        </div>
+            </p:dialog>
+        </h:form>
     </h:body>
 </html>

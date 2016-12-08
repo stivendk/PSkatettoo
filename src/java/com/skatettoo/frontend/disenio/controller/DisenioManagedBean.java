@@ -27,15 +27,8 @@ import javax.ejb.EJB;
 public class DisenioManagedBean implements Serializable {
 
     private Disenio disenio;
-    private List<Disenio> lisdis;
-    private EstiloDisenio estil;
-    private Usuario usuario;
     @EJB
     private DisenioFacadeLocal diseniofc;
-    @EJB
-    private EstiloDisenioFacadeLocal estilfc;
-    @EJB
-    private UsuarioFacadeLocal usuariofc;
     
 
     public Disenio getDisenio() {
@@ -49,31 +42,6 @@ public class DisenioManagedBean implements Serializable {
     public void setDisenio(Disenio disenio) {
         this.disenio = disenio;
     }
-
-    public List<Disenio> getLisdis() {
-        lisdis = diseniofc.findAll();
-        return lisdis;
-    }
-
-    public void setLisdis(List<Disenio> lisdis) {
-        this.lisdis = lisdis;
-    }
-
-    public EstiloDisenio getEstil(Integer id) {
-        return estilfc.find(id);
-    }
-
-    public void setEstil(EstiloDisenio estil) {
-        this.estil = estil;
-    }
-
-    public Usuario getUsuario(Integer id) {
-        return usuariofc.find(id);
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
-    }
     
     public DisenioManagedBean() {
     }
@@ -81,15 +49,13 @@ public class DisenioManagedBean implements Serializable {
     @PostConstruct
     public void init(){
         disenio = new Disenio();
-        estil = new EstiloDisenio();
-        usuario = new Usuario();
     }
     
     public void registrarDisenio(){
         diseniofc.create(disenio);
     }
     
-    public void eliminarDisenio(){
+    public void eliminarDisenio(Disenio disenio){
         diseniofc.remove(disenio);
     }
     

@@ -5,7 +5,7 @@
  */
 package com.skatettoo.frontend.disenio.converter;
 
-import com.skatettoo.backend.persistence.entities.EstiloDisenio;
+import com.skatettoo.backend.persistence.entities.Usuario;
 import com.skatettoo.frontend.util.AbstractConvertidores;
 import javax.faces.convert.FacesConverter;
 
@@ -13,10 +13,13 @@ import javax.faces.convert.FacesConverter;
  *
  * @author StivenDavid
  */
-@FacesConverter(forClass = EstiloDisenio.class)
-public class EstiloDisenioConverter extends AbstractConvertidores {
+@FacesConverter(forClass = Usuario.class)
+public class UsuarioConverter extends AbstractConvertidores{
 
-    public EstiloDisenioConverter() {
-        this.nombreMB = "estiloDisenioManagedBean";
+    public UsuarioConverter() {
+        this.nombreMB = "usuarioManagedBean";
     }
+
+   
+
 }

@@ -7,6 +7,7 @@ package com.skatettoo.frontend.disenio.controller;
 
 import com.skatettoo.backend.persistence.entities.EstiloDisenio;
 import com.skatettoo.backend.persistence.facade.EstiloDisenioFacadeLocal;
+import com.skatettoo.frontend.util.Managedbean;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -18,16 +19,15 @@ import javax.ejb.EJB;
  *
  * @author StivenDavid
  */
-@Named(value = "estiloManagedBean")
+@Named(value = "estiloDisenioManagedBean")
 @SessionScoped
-public class EstiloManagedBean implements Serializable {
+public class EstiloDisenioManagedBean implements Serializable, Managedbean <EstiloDisenio> {
 
     private EstiloDisenio estil;
-    private List<EstiloDisenio> lisest;
     @EJB
     private EstiloDisenioFacadeLocal estilfc;
     
-    public EstiloManagedBean() {
+    public EstiloDisenioManagedBean() {
     }
 
     public EstiloDisenio getEstil() {
@@ -38,15 +38,6 @@ public class EstiloManagedBean implements Serializable {
         this.estil = estil;
     }
 
-    public List<EstiloDisenio> getLisest() {
-        lisest = estilfc.findAll();
-        return lisest;
-    }
-
-    public void setLisest(List<EstiloDisenio> lisest) {
-        this.lisest = lisest;
-    }
-    
     @PostConstruct
     public void init(){
         estil = new EstiloDisenio();
@@ -66,5 +57,14 @@ public class EstiloManagedBean implements Serializable {
     
     public void modificarEstilo(){
         estilfc.edit(estil);
+    }
+    
+    public List<EstiloDisenio> listarDisenio(){
+        return estilfc.findAll();
+    }
+
+    @Override
+    public EstiloDisenio getObject(Integer i) {
+        return estilfc.find(i);
     }
 }
