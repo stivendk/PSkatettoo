@@ -5,7 +5,7 @@
  */
 package com.skatettoo.frontend.usuario.converter;
 
-import com.skatettoo.backend.persistence.entities.Rol;
+import com.skatettoo.backend.persistence.entities.Usuario;
 import com.skatettoo.frontend.util.AbstractConvertidores;
 import javax.faces.convert.FacesConverter;
 
@@ -13,11 +13,13 @@ import javax.faces.convert.FacesConverter;
  *
  * @author StivenDavid
  */
-@FacesConverter(forClass = Rol.class)
-public class RolConverter extends AbstractConvertidores{
+@FacesConverter(forClass = Usuario.class)
+public class UsuarioConverter extends AbstractConvertidores{
 
-    public RolConverter() {
-        this.nombreMB = "rolManagedBean";
+    public UsuarioConverter() {
+        this.nombreMB = "usuarioManagedBean";
     }
-    
+
+   
+
 }

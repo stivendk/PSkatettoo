@@ -30,6 +30,4 @@ public interface EstiloDisenioFacadeLocal {
 
     int count();
     
-    EstiloDisenio verEstilo(String id);
-    
 }

@@ -67,4 +67,7 @@ public class DisenioManagedBean implements Serializable {
         diseniofc.edit(disenio);
     }
     
+    public List<Disenio> listarDisenio(){
+        return diseniofc.findAll();
+    }
 }

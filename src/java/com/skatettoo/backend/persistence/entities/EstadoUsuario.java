@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "EstadoUsuario.findAll", query = "SELECT e FROM EstadoUsuario e"),
     @NamedQuery(name = "EstadoUsuario.findByIdEstadoUsuario", query = "SELECT e FROM EstadoUsuario e WHERE e.idEstadoUsuario = :idEstadoUsuario"),
     @NamedQuery(name = "EstadoUsuario.findByNombreEstadoUsuario", query = "SELECT e FROM EstadoUsuario e WHERE e.nombreEstadoUsuario = :nombreEstadoUsuario")})
-public class EstadoUsuario implements Serializable {
+public class EstadoUsuario implements Serializable, IEntitie {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -111,6 +111,11 @@ public class EstadoUsuario implements Serializable {
     @Override
     public String toString() {
         return "com.skatettoo.backend.persistence.entities.EstadoUsuario[ idEstadoUsuario=" + idEstadoUsuario + " ]";
+    }
+
+    @Override
+    public String getId() {
+        return idEstadoUsuario.toString();
     }
     
 }
