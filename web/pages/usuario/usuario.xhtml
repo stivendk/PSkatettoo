@@ -13,10 +13,6 @@
                 <p:messages autoUpdate="true"></p:messages>
                 <h1><h:outputText value="Create/Edit"/></h1>
                 <p:panelGrid columns="2">
-                    <p:outputLabel value="Username:" for="username" />
-                    <p:inputText id="username" value="#{usuarioManagedBean.usuario.username}" title="Username" required="true" requiredMessage="The Username field is required."/>
-                    <p:outputLabel value="Password:" for="password" />
-                    <p:inputText id="password" value="#{usuarioManagedBean.usuario.password}" title="Password" required="true" requiredMessage="The Password field is required."/>
                     <p:outputLabel value="Nombre:" for="nombre" />
                     <p:inputText id="nombre" value="#{usuarioManagedBean.usuario.nombre}" title="Nombre" required="true" requiredMessage="The Nombre field is required."/>
                     <p:outputLabel value="Apellido:" for="apellido" />
@@ -35,6 +31,12 @@
                         <!-- TODO: update below reference to list of available items-->
                         <f:selectItems value="#{estadoUsuarioManagedBean.listarEstado()}" var="estado" itemLabel="#{estado.nombreEstadoUsuario}"/>
                     </p:selectOneMenu>
+                    <p:outputLabel value="Username:" for="username" />
+                    <p:inputText id="username" value="#{usuarioManagedBean.usuario.username}" title="Username" required="true" requiredMessage="The Username field is required."/>
+                    <p:outputLabel value="Password:" for="password" />
+                    <p:password id="password" value="#{usuarioManagedBean.usuario.password}" match="password2" title="Password" validatorMessage="Los passwords no coinciden" required="true" requiredMessage="The Password field is required."/>
+                    <p:outputLabel value="Repetir Password:" for="password" />
+                    <p:password id="password2" title="Password" required="true" requiredMessage="The Password field is required."/>
                 </p:panelGrid>
                 <p:commandButton value="Registrar" actionListener="#{usuarioManagedBean.registrarUsuario()}"/>
             </h:form>

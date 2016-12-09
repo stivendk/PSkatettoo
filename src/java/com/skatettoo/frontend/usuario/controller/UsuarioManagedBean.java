@@ -5,11 +5,7 @@
  */
 package com.skatettoo.frontend.usuario.controller;
 
-import com.skatettoo.backend.persistence.entities.EstadoUsuario;
-import com.skatettoo.backend.persistence.entities.Rol;
 import com.skatettoo.backend.persistence.entities.Usuario;
-import com.skatettoo.backend.persistence.facade.EstadoUsuarioFacadeLocal;
-import com.skatettoo.backend.persistence.facade.RolFacadeLocal;
 import com.skatettoo.backend.persistence.facade.UsuarioFacadeLocal;
 import com.skatettoo.frontend.util.Managedbean;
 import javax.inject.Named;
@@ -18,6 +14,8 @@ import java.io.Serializable;
 import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -25,7 +23,7 @@ import javax.ejb.EJB;
  */
 @Named(value = "usuarioManagedBean")
 @SessionScoped
-public class UsuarioManagedBean implements Serializable, Managedbean <Usuario>{
+public class UsuarioManagedBean implements Serializable, Managedbean<Usuario> {
 
     private Usuario usuario;
     @EJB
@@ -66,9 +64,25 @@ public class UsuarioManagedBean implements Serializable, Managedbean <Usuario>{
     public void actualizarUsuario(Usuario u) {
         usuario = u;
     }
-    
-    public List<Usuario> listarUsuario(){
+
+    public List<Usuario> listarUsuario() {
         return usuariofc.findAll();
+    }
+
+    public String login() {
+        Usuario uss;
+        String redir = null;
+        try {
+            uss = usuariofc.login(usuario);
+            if (uss!=null) {
+                redir = "/pages/entrar";
+            }else{
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN,"Aviso","Credenciales incorrectas"));
+            } 
+        }catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL,"Aviso","Error!"));
+        }
+        return redir;
     }
 
     @Override
